@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { convocationService } from '../services/convocationService';
 import { SendEmailRequestDto } from '../types';
@@ -12,17 +13,25 @@ interface FormData {
   ccEmails: { email: string }[];
 }
 
+
+
 const SendEmail: React.FC = () => {
+  const location = useLocation();
+  const sessionIdFromState = (location.state as { sessionId?: string })?.sessionId || "";
+
+  // ✅ États pour gérer le chargement et la confirmation
   const [loading, setLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 
   const { control, handleSubmit, register, formState: { errors } } = useForm<FormData>({
     defaultValues: {
-      sessionId: '',
-      examenLabel: '',
-      ccEmails: [{ email: '' }],
+      sessionId: sessionIdFromState,  // pré-rempli automatiquement
+      examenLabel: "",
+      ccEmails: [{ email: "" }],
     },
   });
+
+
 
   const { fields, append, remove } = useFieldArray({
     control,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { convocationService } from '../services/convocationService';
 import { adminService } from '../services/adminService';
@@ -27,6 +28,7 @@ const GenerateConvocations: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [generateResult, setGenerateResult] = useState<GenerateResponseDto | null>(null);
   const [downloadingFile, setDownloadingFile] = useState(false);
+  const navigate = useNavigate();
 
   // États pour les données de référence
   const [villes, setVilles] = useState<Ville[]>([]);
@@ -385,12 +387,11 @@ const GenerateConvocations: React.FC = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Date de rendu *
+                  Date de rendu
                 </label>
                 <Controller
                     name="dateRendu"
                     control={control}
-                    rules={{ required: 'Date de rendu requise' }}
                     render={({ field }) => (
                         <input
                             {...field}
@@ -399,19 +400,15 @@ const GenerateConvocations: React.FC = () => {
                         />
                     )}
                 />
-                {errors.dateRendu && (
-                    <p className="mt-1 text-sm text-red-600">{errors.dateRendu.message}</p>
-                )}
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Heure de rendu *
+                  Heure de rendu
                 </label>
                 <Controller
                     name="heureRendu"
                     control={control}
-                    rules={{ required: 'Heure de rendu requise' }}
                     render={({ field }) => (
                         <input
                             {...field}
@@ -420,10 +417,8 @@ const GenerateConvocations: React.FC = () => {
                         />
                     )}
                 />
-                {errors.heureRendu && (
-                    <p className="mt-1 text-sm text-red-600">{errors.heureRendu.message}</p>
-                )}
               </div>
+
 
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -539,7 +534,7 @@ const GenerateConvocations: React.FC = () => {
                   </Button>
 
                   <Button
-                      onClick={() => window.location.href = '/email'}
+                      onClick={() => navigate('/email', { state: { sessionId: generateResult.sessionId } })}
                       leftIcon={<Mail className="h-4 w-4" />}
                       variant="secondary"
                   >
