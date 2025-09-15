@@ -80,6 +80,15 @@ const GenerateConvocations: React.FC = () => {
         setTypesExamen(typesExamenData);
         setDurees(dureesData);
         setClasses(classesData);
+
+        // Définit automatiquement la première ville et la première adresse
+
+        if (villesData.length > 0) {
+          setValue("villeId", villesData[0].id);
+        }
+        if (adressesData.length > 0) {
+          setValue("adresseId", adressesData[0].id);
+        }
       } catch (error) {
         console.error('Erreur lors du chargement des données:', error);
         toast.error('Erreur lors du chargement des données de référence');
@@ -87,7 +96,7 @@ const GenerateConvocations: React.FC = () => {
     };
 
     loadReferenceData();
-  }, []);
+  }, [setValue]);
 
   // Filtrage des certifications et types d'examen par classe
   useEffect(() => {
@@ -253,13 +262,13 @@ const GenerateConvocations: React.FC = () => {
                             onChange={(e) => field.onChange(parseInt(e.target.value))}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                         >
-                          <option value={0}>Sélectionnez une ville</option>
                           {villes.map((ville) => (
                               <option key={ville.id} value={ville.id}>
                                 {ville.nom}
                               </option>
                           ))}
                         </select>
+
                     )}
                 />
                 {errors.villeId && (
@@ -281,7 +290,6 @@ const GenerateConvocations: React.FC = () => {
                             onChange={(e) => field.onChange(parseInt(e.target.value))}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                         >
-                          <option value={0}>Sélectionnez une adresse</option>
                           {adresses.map((adresse) => (
                               <option key={adresse.id} value={adresse.id}>
                                 {adresse.rue}

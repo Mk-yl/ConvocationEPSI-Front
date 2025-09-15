@@ -19,7 +19,7 @@ const SendEmail: React.FC = () => {
   const location = useLocation();
   const sessionIdFromState = (location.state as { sessionId?: string })?.sessionId || "";
 
-  // ✅ États pour gérer le chargement et la confirmation
+  //  États pour gérer le chargement et la confirmation
   const [loading, setLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 

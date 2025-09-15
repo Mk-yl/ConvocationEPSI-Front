@@ -94,13 +94,33 @@ export const convocationService = {
   },
 
   // Téléchargement du fichier zip
-  async downloadFile(sessionId: string): Promise<Blob> {
+  async downloadFile(sessionId: string) {
     const response = await api.get(`/download/${sessionId}`, {
       responseType: 'blob',
-      timeout: 120000, // 2 minutes pour le téléchargement
+      timeout: 120000,
     });
-    return response.data;
+
+    const cd = response.headers['content-disposition']; // axios => en minuscules
+    let fileName = 'Convocations.zip';
+
+    if (cd) {
+      // essaie filename* (UTF-8) puis filename
+      const matchStar = cd.match(/filename\*=UTF-8''([^;]+)/);
+      const matchPlain = cd.match(/filename="?([^";]+)"?/);
+      if (matchStar && matchStar[1]) fileName = decodeURIComponent(matchStar[1]);
+      else if (matchPlain && matchPlain[1]) fileName = matchPlain[1];
+    }
+
+    const url = URL.createObjectURL(new Blob([response.data]));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   },
+
 
   // Envoi des emails
   async sendEmails(request: SendEmailRequestDto): Promise<string> {
