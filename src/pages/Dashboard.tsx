@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Upload, FileText, Mail, Settings, BarChart3 } from 'lucide-react';
+import { Upload, FileText, Mail, Settings, BookOpen } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const quickActions = [
@@ -64,25 +64,24 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center">
-          <BarChart3 className="h-6 w-6 text-blue-600 mr-3" />
-          <h2 className="text-xl font-semibold text-gray-900">Statistiques récentes</h2>
+        <div className="flex items-center mb-4">
+          <BookOpen className="h-6 w-6 text-yellow-600 mr-3" />
+          <h2 className="text-xl font-semibold text-gray-900">Guide d’utilisation</h2>
         </div>
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="text-center">
-            <p className="text-3xl font-bold text-blue-600">0</p>
-            <p className="text-sm text-gray-500">Sessions traitées</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl font-bold text-green-600">0</p>
-            <p className="text-sm text-gray-500">Convocations générées</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl font-bold text-purple-600">0</p>
-            <p className="text-sm text-gray-500">Emails envoyés</p>
-          </div>
-        </div>
+
+        <p className="text-gray-600 mb-4">
+          Consultez le guide pour apprendre à importer les candidats, générer et
+          envoyer les convocations, ainsi que gérer l’administration.
+        </p>
+
+        <Link
+            to="/guide"
+            className="inline-block px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-400 transition-colors"
+        >
+          Ouvrir le guide
+        </Link>
       </div>
+
     </div>
   );
 };

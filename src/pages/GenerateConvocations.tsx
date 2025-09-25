@@ -172,7 +172,7 @@ const GenerateConvocations: React.FC = () => {
       toast.success('Fichier téléchargé avec succès');
     } catch (error) {
       console.error('Erreur lors du téléchargement:', error);
-      toast.error('Erreur lors du téléchargement du fichier');
+
     } finally {
       setDownloadingFile(false);
     }

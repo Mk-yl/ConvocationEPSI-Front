@@ -11,7 +11,8 @@ import {
   Award, 
   GraduationCap, 
   Clock, 
-  Users 
+  Users ,
+  BookOpen
 } from 'lucide-react';
 
 const navigation = [
@@ -19,6 +20,8 @@ const navigation = [
   { name: 'Import Candidats', href: '/import', icon: Upload },
   { name: 'Génération', href: '/generate', icon: FileText },
   { name: 'Envoi Email', href: '/email', icon: Mail },
+  { name: 'Guide', href: '/guide', icon: BookOpen },
+
 ];
 
 const adminNavigation = [

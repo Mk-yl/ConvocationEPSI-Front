@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import ImportCandidats from './pages/ImportCandidats';
 import GenerateConvocations from './pages/GenerateConvocations';
 import SendEmail from './pages/SendEmail';
+import Guide from './pages/Guide';
 
 // Pages d'administration
 import AdminVilles from './pages/admin/AdminVilles';
@@ -16,6 +17,7 @@ import AdminCertifications from './pages/admin/AdminCertifications';
 import AdminTypesExamen from './pages/admin/AdminTypesExamen';
 import AdminDurees from './pages/admin/AdminDurees';
 import AdminClasses from './pages/admin/AdminClasses';
+
 
 const App: React.FC = () => {
   return (
@@ -27,6 +29,7 @@ const App: React.FC = () => {
             <Route path="import" element={<ImportCandidats />} />
             <Route path="generate" element={<GenerateConvocations />} />
             <Route path="email" element={<SendEmail />} />
+            <Route path="guide" element={<Guide/>} />
             
             {/* Routes d'administration */}
             <Route path="admin/villes" element={<AdminVilles />} />
